@@ -2,11 +2,23 @@ package bat_trade
 
 import (
 	"log"
+	"time"
 
 	"github.com/yzlq99/eastmoneyapi/client"
+	"github.com/yzlq99/eastmoneyapi/model"
 	"github.com/yzlq99/non-action-quant/config"
 	"github.com/yzlq99/non-action-quant/utils"
 )
+
+type EmptyModel struct {
+	Time    string `json:"Time"`
+	Message string `json:"Message"`
+}
+
+type LogModel struct {
+	Time string `json:"Time"`
+	*model.SubmitBatTradeResult
+}
 
 // 每周 1-5 的 11：08 申购新股新债
 type BatTrade struct {
@@ -24,13 +36,17 @@ func (b *BatTrade) Run() {
 }
 
 func (b *BatTrade) newConvertibleBond() {
+	currentTime := time.Now()
 	bonds, err := b.EmCli.GetNewConvertibleBondList()
 	if err != nil {
 		log.Panic(err)
 	}
 
 	if bonds == nil || len(bonds.Data) <= 0 {
-		log.Print("今天无新债申购")
+		log.Print(EmptyModel{
+			Time:    currentTime.Format("2006-1-2 15:4:5"),
+			Message: "今天无新债申购",
+		})
 		return
 	}
 
@@ -38,17 +54,24 @@ func (b *BatTrade) newConvertibleBond() {
 	if err != nil {
 		log.Panic(err)
 	}
-	log.Print(utils.ToJson(res))
+	log.Print(utils.ToJson(LogModel{
+		Time:                 currentTime.Format("2006-1-2 15:4:5"),
+		SubmitBatTradeResult: res,
+	}))
 }
 
 func (b *BatTrade) newStock() {
+	currentTime := time.Now()
 	newStock, err := b.EmCli.GetCanBuyNewStockList()
 	if err != nil {
 		log.Panic(err)
 	}
 
 	if newStock == nil || len(newStock.NewStockList) <= 0 {
-		log.Print("今天无新股申购")
+		log.Print(EmptyModel{
+			Time:    currentTime.Format("2006-1-2 15:4:5"),
+			Message: "今天无新债申购",
+		})
 		return
 	}
 
@@ -56,5 +79,8 @@ func (b *BatTrade) newStock() {
 	if err != nil {
 		log.Panic(err)
 	}
-	log.Print(utils.ToJson(res))
+	log.Print(utils.ToJson(LogModel{
+		Time:                 currentTime.Format("2006-1-2 15:4:5"),
+		SubmitBatTradeResult: res,
+	}))
 }
