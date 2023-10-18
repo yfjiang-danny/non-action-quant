@@ -43,10 +43,10 @@ func (b *BatTrade) newConvertibleBond() {
 	}
 
 	if bonds == nil || len(bonds.Data) <= 0 {
-		log.Print(EmptyModel{
-			Time:    currentTime.Format("2006-1-2 15:4:5"),
+		log.Print(utils.ToJson(EmptyModel{
+			Time:    currentTime.Format("2006-01-02 15:04:05"),
 			Message: "今天无新债申购",
-		})
+		}))
 		return
 	}
 
@@ -55,7 +55,7 @@ func (b *BatTrade) newConvertibleBond() {
 		log.Panic(err)
 	}
 	log.Print(utils.ToJson(LogModel{
-		Time:                 currentTime.Format("2006-1-2 15:4:5"),
+		Time:                 currentTime.Format("2006-01-02 15:04:05"),
 		SubmitBatTradeResult: res,
 	}))
 }
@@ -68,10 +68,10 @@ func (b *BatTrade) newStock() {
 	}
 
 	if newStock == nil || len(newStock.NewStockList) <= 0 {
-		log.Print(EmptyModel{
-			Time:    currentTime.Format("2006-1-2 15:4:5"),
-			Message: "今天无新债申购",
-		})
+		log.Print(utils.ToJson(EmptyModel{
+			Time:    currentTime.Format("2006-01-02 15:04:05"),
+			Message: "今天无新股申购",
+		}))
 		return
 	}
 
@@ -80,7 +80,7 @@ func (b *BatTrade) newStock() {
 		log.Panic(err)
 	}
 	log.Print(utils.ToJson(LogModel{
-		Time:                 currentTime.Format("2006-1-2 15:4:5"),
+		Time:                 currentTime.Format("2006-01-02 15:04:05"),
 		SubmitBatTradeResult: res,
 	}))
 }
