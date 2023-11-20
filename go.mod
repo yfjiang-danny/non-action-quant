@@ -1,11 +1,11 @@
-module github.com/yzlq99/non-action-quant
+module github.com/yfjiang-danny/non-action-quant
 
 go 1.17
 
 require (
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/viper v1.15.0
-	github.com/yzlq99/eastmoneyapi v0.0.3
+	github.com/yfjiang-danny/eastmoneyapi v0.0.1
 )
 
 require (

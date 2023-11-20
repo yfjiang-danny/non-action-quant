@@ -7,8 +7,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/yzlq99/eastmoneyapi/client"
-	"github.com/yzlq99/non-action-quant/config"
+	"github.com/yfjiang-danny/eastmoneyapi/client"
+	"github.com/yfjiang-danny/non-action-quant/config"
 )
 
 var configPath string

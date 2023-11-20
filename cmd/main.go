@@ -4,10 +4,10 @@ import (
 	"flag"
 	"log"
 
-	"github.com/yzlq99/eastmoneyapi/client"
-	"github.com/yzlq99/non-action-quant/bat_trade"
-	"github.com/yzlq99/non-action-quant/config"
-	"github.com/yzlq99/non-action-quant/cron"
+	"github.com/yfjiang-danny/eastmoneyapi/client"
+	"github.com/yfjiang-danny/non-action-quant/bat_trade"
+	"github.com/yfjiang-danny/non-action-quant/config"
+	"github.com/yfjiang-danny/non-action-quant/cron"
 )
 
 var configPath string
